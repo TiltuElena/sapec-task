@@ -1,0 +1,67 @@
+<section class="flex flex-col gap-4">
+  <button
+    hlmBtn
+    variant="secondary"
+    class="rounded-md flex text-l py-6 w-fit"
+    (click)="createNewUser()"
+  >
+    <ng-icon hlm size="base" class="mr-2" name="lucidePlus" />
+    Create new user
+  </button>
+  <div class="overflow-x-auto">
+    <hlm-table class="min-w-[800px] table-fixed">
+      <hlm-trow>
+        <hlm-th class="px-4 py-2 w-[10%]">ID</hlm-th>
+        <hlm-th class="px-4 py-2 w-[20%]">Full Name</hlm-th>
+        <hlm-th class="px-4 py-2 w-[20%]">Email</hlm-th>
+        <hlm-th class="px-4 py-2 w-[10%]">Role</hlm-th>
+        <hlm-th class="px-4 py-2 w-[20%]">Creation Time</hlm-th>
+        <hlm-th class="px-4 py-2 w-[10%]">Status</hlm-th>
+        <hlm-th class="px-4 py-2 w-[10%]"></hlm-th>
+      </hlm-trow>
+      @for (user of userData$ | async; track $index) {
+        <hlm-trow>
+          <hlm-td truncate class="px-4 py-2 font-medium w-[10%] items-start">
+            {{ user.id }}
+          </hlm-td>
+          <hlm-td class="px-4 py-2 w-[20%] items-start">
+            {{ user.fullName }}
+          </hlm-td>
+          <hlm-td class="px-4 py-2 w-[20%] items-start">
+            {{ user.email }}
+          </hlm-td>
+          <hlm-td class="px-4 py-2 w-[10%] items-start">
+            {{ user.role }}
+          </hlm-td>
+          <hlm-td class="px-4 py-2 w-[20%] items-start">
+            {{ user.creationTime | date }}
+          </hlm-td>
+          <hlm-td class="px-4 py-2 w-[10%] items-start">
+            {{ user.status }}
+          </hlm-td>
+          <hlm-td class="w-[10%] items-start">
+            <div class="flex gap-3 justify-center w-full">
+              <ng-icon
+                hlm
+                size="sm"
+                color="green"
+                class="cursor-pointer"
+                name="lucidePencil"
+                (click)="editUser(user)"
+              />
+
+              <ng-icon
+                hlm
+                size="sm"
+                color="red"
+                class="cursor-pointer"
+                name="lucideTrash2"
+                (click)="deleteUser(user)"
+              />
+            </div>
+          </hlm-td>
+        </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+</section>

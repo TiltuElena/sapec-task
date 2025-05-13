@@ -1,0 +1,107 @@
+<hlm-dialog-header>
+  <h3 hlmDialogTitle>{{ isEditMode ? "Edit entry" : "Create entry" }}</h3>
+  <p hlmDialogDescription>
+    {{
+      isEditMode
+        ? "Make changes to your entry here. Click save when you're done."
+        : "Fill out the details below to create a new entry."
+    }}
+  </p>
+</hlm-dialog-header>
+
+<form class="py-4 px-3 gap-4 flex flex-col items-center" [formGroup]="inventoryForm">
+  <div class="w-full">
+    <label hlmLabel for="productName">Product Name</label>
+    <input
+      hlmInput
+      id="productName"
+      class="w-full"
+      formControlName="productName"
+      placeholder="Product Name"
+    />
+    @if (
+      inventoryForm.get("productName")?.hasError("required") &&
+      inventoryForm.get("productName")?.touched
+      ) {
+      <div class="text-destructive">Product name is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="category">Category</label>
+    <input
+      hlmInput
+      id="category"
+      class="w-full"
+      formControlName="category"
+      placeholder="Category"
+    />
+    @if (
+      inventoryForm.get("category")?.hasError("required") &&
+      inventoryForm.get("category")?.touched
+      ) {
+      <div class="text-destructive">Category is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="pricePerUnit">Quantity</label>
+    <input
+      hlmInput
+      id="quantity"
+      class="w-full"
+      formControlName="quantity"
+      placeholder="0"
+    />
+    @if (
+      inventoryForm.get("quantity")?.hasError("required") &&
+      inventoryForm.get("quantity")?.touched
+      ) {
+      <div class="text-destructive">Quantity is required</div>
+    }
+  </div>
+
+
+  <div class="w-full">
+    <label hlmLabel for="pricePerUnit">Price per Unit</label>
+    <input
+      hlmInput
+      id="pricePerUnit"
+      class="w-full"
+      formControlName="pricePerUnit"
+      placeholder="0"
+    />
+    @if (
+      inventoryForm.get("pricePerUnit")?.hasError("required") &&
+      inventoryForm.get("pricePerUnit")?.touched
+      ) {
+      <div class="text-destructive">Price per Unit is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="stockCount">Stock Count</label>
+    <input
+      hlmInput
+      id="stockCount"
+      class="w-full"
+      formControlName="stockCount"
+      placeholder="0"
+    />
+    @if (
+      inventoryForm.get("stockCount")?.hasError("required") &&
+      inventoryForm.get("stockCount")?.touched
+      ) {
+      <div class="text-destructive">Stock Count is required</div>
+    }
+  </div>
+</form>
+
+<hlm-dialog-footer>
+  <div class="w-full flex justify-between">
+    <button hlmBtn variant="secondary" (click)="cancel()">Cancel</button>
+    <button hlmBtn (click)="onSubmit()">
+      {{ isEditMode ? "Save changes" : "Create entry" }}
+    </button>
+  </div>
+</hlm-dialog-footer>

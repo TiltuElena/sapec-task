@@ -1,0 +1,64 @@
+<section class="h-screen flex flex-col items-center justify-center">
+  <div class="flex flex-col items-center gap-4 py-20 px-16 bg-card shadow">
+    <span hlmCardTitle class="text-4xl">Login</span>
+    <form
+      hlmCardContent
+      class="flex flex-col gap-4 w-96 p-0"
+      [formGroup]="loginForm"
+    >
+      <label class="block" hlmLabel>
+        Email
+        <input
+          class="mt-1.5 w-full bg-input rounded py-3 px-2 h-auto"
+          type="text"
+          placeholder="email@gmail.com"
+          hlmInput
+          formControlName="email"
+          [ngClass]="{
+              'border-red-300 focus:outline-red-500':
+                loginForm.get('email')?.touched &&
+                loginForm.get('email')?.invalid
+            }"
+        />
+        @if (
+          loginForm.get("email")?.hasError("required") &&
+          loginForm.get("email")?.touched
+        ) {
+          <div class="text-destructive">Email is required</div>
+        } @else if (loginForm.get("email")?.hasError("email")) {
+          <div class="text-destructive">Invalid email</div>
+        }
+      </label>
+      <label class="block" hlmLabel>
+        Password
+        <input
+          class="mt-1.5 w-full bg-input rounded py-3 px-2 h-auto"
+          type="password"
+          placeholder="Password"
+          hlmInput
+          formControlName="password"
+          [ngClass]="{
+              'border-red-300 focus:outline-red-500':
+                loginForm.get('password')?.touched &&
+                loginForm.get('password')?.invalid
+            }"
+        />
+        @if (
+          loginForm.get("password")?.hasError("required") &&
+          loginForm.get("password")?.touched
+          ) {
+          <div class="text-destructive">password is required</div>
+        } @else if (loginForm.get("password")?.hasError("password")) {
+          <div class="text-destructive">Password is required</div>
+        }
+      </label>
+    </form>
+    <button
+      hlmBtn
+      (click)="onSubmit()"
+      class="bg-success w-full rounded text-background font-bold hover:bg-success"
+    >
+      Submit
+    </button>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<hlm-alert-dialog [state]="dialogState.state()">
+  <hlm-alert-dialog-content
+    *brnAlertDialogContent="let ctx"
+    class="flex flex-col justify-center items-center z-50 p-8 rounded-xl bg-accent gap-10 transition-all duration-300 ease-in-out"
+  >
+    <hlm-alert-dialog-header
+      class="flex flex-col justify-center items-center gap-4 z-50"
+    >
+      <h3 hlmAlertDialogTitle class="text-2xl">
+        {{ dialogState.title() }}
+      </h3>
+      <p hlmAlertDialogDescription>
+        {{ dialogState.description() }}
+      </p>
+    </hlm-alert-dialog-header>
+    <hlm-alert-dialog-footer class="w-full">
+      <div class="w-full flex justify-around gap-1">
+        <button hlmAlertDialogCancel (click)="cancel()" class="rounded-lg">
+          Cancel
+        </button>
+        <button
+          hlmAlertDialogAction
+          (click)="confirm()"
+          class="bg-destructive text-secondary rounded-lg"
+        >
+          Delete
+        </button>
+      </div>
+    </hlm-alert-dialog-footer>
+  </hlm-alert-dialog-content>
+</hlm-alert-dialog>

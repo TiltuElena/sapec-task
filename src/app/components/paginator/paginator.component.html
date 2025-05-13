@@ -1,0 +1,65 @@
+<nav hlmPagination class="flex items-center gap-4 py-3 flex-wrap">
+  <span class="text-sm tabular-nums">
+    Entries
+    {{ (currentPage - 1) * pageSize + 1 }}
+    -
+    {{ getEndIndex(currentPage, pageSize, totalElements) }}
+    of {{ totalElements }}
+  </span>
+
+  <brn-select
+    class="inline-block"
+    [ngModel]="pageSize"
+    (ngModelChange)="changePageSize($event)"
+  >
+    <hlm-select-trigger class="inline-flex mr-1 w-15 h-9">
+      <hlm-select-value />
+    </hlm-select-trigger>
+    <hlm-select-content>
+      @for (size of availablePageSizes; track size) {
+        <hlm-option [value]="size">
+          {{ size === 10000 ? "All" : size }}
+        </hlm-option>
+      }
+    </hlm-select-content>
+  </brn-select>
+
+  <ul hlmPaginationContent class="flex items-center gap-2 flex-wrap" >
+    <li hlmPaginationItem>
+      <button
+        [disabled]="currentPage === 1"
+        (click)="goToPage(currentPage - 1)"
+        class="px-2 py-1 disabled:opacity-50"
+      >
+        <hlm-pagination-previous />
+      </button>
+    </li>
+
+    @for (page of pageNumbers; track $index) {
+      <li hlmPaginationItem>
+        @if (page === 0) {
+          <hlm-pagination-ellipsis />
+        } @else {
+          <span
+            [isActive]="page === currentPage"
+            hlmPaginationLink
+            (click)="goToPage(page)"
+            [link]=""
+          >
+            {{ page }}
+          </span>
+        }
+      </li>
+    }
+
+    <li hlmPaginationItem>
+      <button
+        [disabled]="currentPage === totalPages"
+        (click)="goToPage(currentPage + 1)"
+        class="px-2 py-1 disabled:opacity-50"
+      >
+        <hlm-pagination-next />
+      </button>
+    </li>
+  </ul>
+</nav>

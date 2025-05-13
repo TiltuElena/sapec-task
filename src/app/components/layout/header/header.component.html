@@ -1,0 +1,27 @@
+<div class="flex items-center justify-between h-16 bg-accent px-6">
+  <div class="flex items-center gap-4 justify-center flex-1">
+    @for (route of routes; track route) {
+      <span
+        [routerLink]="route.link"
+        routerLinkActive="font-bold text-success"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="cursor-pointer transition duration-300 ease-out hover:opacity-70"
+      >
+        {{ route.title }}
+      </span>
+    }
+  </div>
+
+  <div
+    class="flex items-center gap-2 cursor-pointer transition duration-300 ease-out hover:opacity-70"
+    (click)="logout()"
+  >
+    <ng-icon
+      hlm
+      size="base"
+      name="lucideLogOut"
+      class="cursor-pointer hover:opacity-70 transition duration-200 ease-out"
+    />
+    <span>Logout</span>
+  </div>
+</div>

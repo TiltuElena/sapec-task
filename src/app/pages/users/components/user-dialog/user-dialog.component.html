@@ -1,0 +1,133 @@
+<hlm-dialog-header>
+  <h3 hlmDialogTitle>{{ isEditMode ? "Edit profile" : "Create profile" }}</h3>
+  <p hlmDialogDescription>
+    {{
+      isEditMode
+        ? "Make changes to your profile here. Click save when you're done."
+        : "Fill out the details below to create a new profile."
+    }}
+  </p>
+</hlm-dialog-header>
+
+<form class="py-4 px-3 gap-4 flex flex-col items-center" [formGroup]="userForm">
+  <div class="w-full">
+    <label hlmLabel for="fullName">Full Name</label>
+    <input
+      hlmInput
+      id="fullName"
+      class="w-full"
+      formControlName="fullName"
+      placeholder="Name Surname"
+    />
+    @if (
+      userForm.get("fullName")?.hasError("required") &&
+      userForm.get("fullName")?.touched
+    ) {
+      <div class="text-destructive">Full name is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="email">Email</label>
+    <input
+      hlmInput
+      id="email"
+      class="w-full"
+      formControlName="email"
+      placeholder="email@gmail.com"
+    />
+    @if (
+      userForm.get("email")?.hasError("required") &&
+      userForm.get("email")?.touched
+    ) {
+      <div class="text-destructive">Email is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="role">Role</label>
+    <brn-select
+      id="role"
+      class="inline-block w-full"
+      formControlName="role"
+      placeholder="Select role"
+    >
+      <hlm-select-trigger class="w-full">
+        <hlm-select-value>
+          <div class="flex items-center gap-x-2" *brnSelectValue="let value">
+            {{ value.label }}
+          </div>
+        </hlm-select-value>
+      </hlm-select-trigger>
+      <hlm-select-content>
+        @for (option of userRoleOptions; track option.label) {
+          <hlm-option [value]="option">
+            {{ option.label }}
+          </hlm-option>
+        }
+      </hlm-select-content>
+    </brn-select>
+    @if (
+      userForm.get("role")?.hasError("required") &&
+      userForm.get("role")?.touched
+    ) {
+      <div class="text-destructive">Role is required</div>
+    }
+  </div>
+
+  <div class="w-full flex flex-col gap-2">
+    <label hlmLabel for="creationTime">Creation TIme</label>
+    <p-date-picker
+      placeholder="mm/dd/yyyy"
+      id="creationTime"
+      formControlName="creationTime"
+      [showIcon]="true"
+    />
+    @if (
+      userForm.get("creationTime")?.hasError("required") &&
+      userForm.get("creationTime")?.touched
+    ) {
+      <div class="text-destructive">Creation date is required</div>
+    }
+  </div>
+
+  <div class="w-full">
+    <label hlmLabel for="status">Status</label>
+    <brn-select
+      id="status"
+      class="inline-block w-full"
+      formControlName="status"
+      placeholder="Select status"
+    >
+      <hlm-select-trigger class="w-full">
+        <hlm-select-value>
+          <div class="flex items-center gap-x-2" *brnSelectValue="let value">
+            {{ value.label }}
+          </div>
+        </hlm-select-value>
+      </hlm-select-trigger>
+      <hlm-select-content>
+        @for (option of userStatusOptions; track option.label) {
+          <hlm-option [value]="option">
+            {{ option.label }}
+          </hlm-option>
+        }
+      </hlm-select-content>
+    </brn-select>
+    @if (
+      userForm.get("status")?.hasError("required") &&
+      userForm.get("status")?.touched
+    ) {
+      <div class="text-destructive">Status is required</div>
+    }
+  </div>
+</form>
+
+<hlm-dialog-footer>
+  <div class="w-full flex justify-between">
+    <button hlmBtn variant="secondary" (click)="cancel()">Cancel</button>
+    <button hlmBtn (click)="onSubmit()">
+      {{ isEditMode ? "Save changes" : "Create user" }}
+    </button>
+  </div>
+</hlm-dialog-footer>

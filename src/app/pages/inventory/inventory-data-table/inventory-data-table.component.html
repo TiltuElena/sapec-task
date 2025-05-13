@@ -1,0 +1,66 @@
+<section class="flex flex-col gap-4">
+  <button
+    hlmBtn
+    variant="secondary"
+    class="rounded-md flex text-l py-6 w-fit"
+    (click)="createNewEntry()"
+  >
+    <ng-icon hlm size="base" class="mr-2" name="lucidePlus" />
+    Create new entry
+  </button>
+
+  <div class="overflow-x-auto">
+    <hlm-table class="min-w-[800px] table-fixed">
+      <hlm-trow>
+        <hlm-th class="px-4 py-2 w-[10%]">ID</hlm-th>
+        <hlm-th class="px-4 py-2 w-[20%]">Product Name</hlm-th>
+        <hlm-th class="px-4 py-2 w-[15%]">Category</hlm-th>
+        <hlm-th class="px-4 py-2 w-[15%]">Quantity</hlm-th>
+        <hlm-th class="px-4 py-2 w-[15%]">Price per Unit</hlm-th>
+        <hlm-th class="px-4 py-2 w-[15%]">Stock Count</hlm-th>
+        <hlm-th class="px-4 py-2 w-[10%]"></hlm-th>
+      </hlm-trow>
+
+      @for (entry of _filteredSortedPaginatedEntries$ | async; track $index) {
+        <hlm-trow>
+          <hlm-td class="px-4 py-4 w-[10%]">{{ entry.id }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[20%]">{{ entry.productName }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.category }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.quantity }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{
+            entry.pricePerUnit | currency
+          }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.stockCount }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[10%]">
+            <div class="flex gap-3 justify-center w-full">
+              <ng-icon
+                hlm
+                size="sm"
+                color="green"
+                class="cursor-pointer"
+                name="lucidePencil"
+                (click)="editEntry(entry)"
+              />
+              <ng-icon
+                hlm
+                size="sm"
+                color="red"
+                class="cursor-pointer"
+                name="lucideTrash2"
+                (click)="deleteEntry(entry)"
+              />
+            </div>
+          </hlm-td>
+        </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+  <app-paginator
+    [totalElements]="(_totalElements$ | async) || 0"
+    [pageSize]="(pageSize$ | async) || 5"
+    [currentPage]="(currentPage$ | async) || 1"
+    [availablePageSizes]="availablePageSizes"
+    (pageChange)="goToPage($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  />
+</section>
