@@ -105,7 +105,6 @@ export class UserCreationStatsChartComponent {
       (a, b) => a.creationTime.getTime() - b.creationTime.getTime(),
     );
 
-    // Group users by creation date and count them
     const creationDateCounts: { [date: string]: number } = {};
     sortedUsers.forEach((user) => {
       const creationDate = user.creationTime.toISOString().split('T')[0];
@@ -113,14 +112,12 @@ export class UserCreationStatsChartComponent {
         (creationDateCounts[creationDate] || 0) + 1;
     });
 
-    // Prepare data for the chart
     const dates = Object.keys(creationDateCounts).sort();
     const userCounts = dates.map((date) => creationDateCounts[date]);
-
-    const dailyCounts: { [date: number]: number } = {}; // Use timestamp for grouping
+    const dailyCounts: { [date: number]: number } = {};
 
     sortedUsers.forEach((user) => {
-      // Get the start of the day timestamp (UTC to avoid timezone issues)
+
       const startOfDay = new Date(
         Date.UTC(
           user.creationTime.getUTCFullYear(),
@@ -132,7 +129,7 @@ export class UserCreationStatsChartComponent {
     });
 
     const seriesData = Object.entries(dailyCounts)
-      .sort(([a], [b]) => Number(a) - Number(b)) // Sort by timestamp
+      .sort(([a], [b]) => Number(a) - Number(b))
       .map(([timestamp, count]) => ({
         x: Number(timestamp),
         y: count,

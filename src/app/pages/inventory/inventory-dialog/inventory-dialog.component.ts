@@ -1,10 +1,4 @@
 import { Component } from '@angular/core';
-import {
-  BrnSelectComponent,
-  BrnSelectContentComponent,
-  BrnSelectValueComponent,
-  BrnSelectValueDirective,
-} from '@spartan-ng/brain/select';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmDialogDescriptionDirective,
@@ -14,10 +8,7 @@ import {
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import {
-  HlmSelectContentDirective,
-  HlmSelectModule,
-} from '@spartan-ng/ui-select-helm';
+import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import {
   FormBuilder,
   FormGroup,

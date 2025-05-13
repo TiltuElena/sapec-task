@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  HlmCardContentDirective,
+  HlmCardContentDirective, HlmCardDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { AuthService } from '@/services/auth.service';
+import { ToastService } from '@/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ import { AuthService } from '@/services/auth.service';
     HlmButtonDirective,
     ReactiveFormsModule,
     NgClass,
+    HlmCardDirective,
   ],
   templateUrl: './login.component.html',
   standalone: true,
@@ -35,6 +37,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private toastService: ToastService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -46,12 +49,12 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const userEmail = this.loginForm.getRawValue().email;
       const userPassword = this.loginForm.getRawValue().password;
-      this.authService.login(userEmail, userPassword);
 
       if (this.authService.login(userEmail, userPassword)) {
-        console.log('successful authentication');
+        this.toastService.showSimpleToast('Successfully logged in');
       } else {
         this.loginForm.reset();
+        this.toastService.showSimpleToast('Incorrect credentials');
       }
     } else {
       this.loginForm.markAsTouched();

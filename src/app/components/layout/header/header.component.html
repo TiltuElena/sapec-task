@@ -1,5 +1,5 @@
-<div class="flex items-center justify-between h-16 bg-accent px-6">
-  <div class="flex items-center gap-4 justify-center flex-1">
+<div class="flex items-center justify-between gap-8 h-16 bg-accent px-6">
+  <div class="flex items-center gap-4 justify-end flex-1">
     @for (route of routes; track route) {
       <span
         [routerLink]="route.link"
@@ -20,7 +20,6 @@
       hlm
       size="base"
       name="lucideLogOut"
-      class="cursor-pointer hover:opacity-70 transition duration-200 ease-out"
     />
     <span>Logout</span>
   </div>

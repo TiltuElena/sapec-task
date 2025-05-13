@@ -1,7 +1,7 @@
 import { DeliveryStatus } from '../enums';
 
 export interface Purchase {
-  orderNr: string;
+  orderNr: number;
   product: string;
   category: string;
   quantity: number;

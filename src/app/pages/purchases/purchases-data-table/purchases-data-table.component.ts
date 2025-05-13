@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import {
   HlmTableComponent,
@@ -8,29 +7,24 @@ import {
   HlmTrowComponent,
 } from '@spartan-ng/ui-table-helm';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { Inventory, Purchase } from '@/ts/interfaces';
+import { Purchase } from '@/ts/interfaces';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { ConfirmDialogService } from '@/services/confirm-dialog.service';
-import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import {
   lucidePencil,
   lucidePlus,
   lucideTrash2,
   lucideArrowUpDown,
 } from '@ng-icons/lucide';
-import { InventoryDialogComponent } from '@/pages/inventory/inventory-dialog/inventory-dialog.component';
 import { BrnTableModule } from '@spartan-ng/brain/table';
 import { HlmPaginationModule } from '@spartan-ng/ui-pagination-helm';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import { FormsModule } from '@angular/forms';
 import { PaginatorComponent } from '@/components/paginator/paginator.component';
-import { ToastService } from '@/services/toast.service';
-import { InventoryDataService } from '@/pages/inventory/services/inventory-data.service';
+import { PurchasesDataService } from '@/pages/purchases/services/purchases-data.service';
 
 @Component({
-  selector: 'app-inventory-data-table',
+  selector: 'app-purchases-data-table',
   imports: [
-    HlmButtonDirective,
     HlmIconDirective,
     HlmTableComponent,
     HlmTableModule,
@@ -47,10 +41,10 @@ import { InventoryDataService } from '@/pages/inventory/services/inventory-data.
   providers: [
     provideIcons({ lucideTrash2, lucidePencil, lucidePlus, lucideArrowUpDown }),
   ],
-  templateUrl: './inventory-data-table.component.html',
+  templateUrl: './purchases-data-table.component.html',
   standalone: true,
 })
-export class InventoryDataTableComponent {
+export class PurchasesDataTableComponent {
   readonly availablePageSizes = [5, 10, 20, 50, 100];
 
   private readonly _pageSize$ = new BehaviorSubject<number>(
@@ -59,18 +53,17 @@ export class InventoryDataTableComponent {
   private readonly _currentPage$ = new BehaviorSubject<number>(1);
 
   private readonly _sortState$ = new BehaviorSubject<{
-    column: keyof Inventory | null;
+    column: keyof Purchase | null;
     direction: 'ASC' | 'DESC' | null;
   }>({
     column: null,
     direction: null,
   });
 
-  readonly inventoryData$: BehaviorSubject<Inventory[]>;
-
+  readonly purchasesData$: BehaviorSubject<Purchase[]>;
   readonly _totalElements$: Observable<number>;
   readonly _displayedIndices$: Observable<{ start: number; end: number }>;
-  readonly _filteredSortedPaginatedEntries$: Observable<Inventory[]>;
+  readonly _filteredSortedPaginatedEntries$: Observable<Purchase[]>;
 
   get pageSize$(): Observable<number> {
     return this._pageSize$.asObservable();
@@ -81,14 +74,11 @@ export class InventoryDataTableComponent {
   }
 
   constructor(
-    private readonly inventoryDataService: InventoryDataService,
-    private readonly confirmDialog: ConfirmDialogService,
-    private readonly dialog: HlmDialogService,
-    private readonly toastService: ToastService,
+    private readonly purchasesDataService: PurchasesDataService,
   ) {
-    this.inventoryData$ = this.inventoryDataService.inventoryData$;
+    this.purchasesData$ = this.purchasesDataService.purchasesData$;
 
-    this._totalElements$ = this.inventoryData$.pipe(map((data) => data.length));
+    this._totalElements$ = this.purchasesData$.pipe(map((data) => data.length));
 
     this._displayedIndices$ = combineLatest([
       this._currentPage$,
@@ -103,7 +93,7 @@ export class InventoryDataTableComponent {
     );
 
     this._filteredSortedPaginatedEntries$ = combineLatest([
-      this.inventoryData$,
+      this.purchasesData$,
       this._sortState$,
       this._displayedIndices$,
     ]).pipe(
@@ -145,7 +135,7 @@ export class InventoryDataTableComponent {
     this.goToPage(1);
   }
 
-  sortByColumn(column: keyof Inventory): void {
+  sortByColumn(column: keyof Purchase): void {
     const current = this._sortState$.value;
 
     let newDirection: 'ASC' | 'DESC' | null = 'ASC';
@@ -161,65 +151,4 @@ export class InventoryDataTableComponent {
     this.goToPage(1);
   }
 
-  createNewEntry(): void {
-    this.openInventoryDialog().subscribe((result?: Inventory) => {
-      if (result) {
-        result.id = this.generateId();
-        const currentData = this.inventoryData$.value;
-        this.inventoryData$.next([...currentData, result]);
-
-        const message = 'A new entry has been created';
-        const description = `Created entry with ID ${result.id} at ${new Date().toLocaleString()}`;
-
-        this.toastService.showToast(message, description);
-      }
-    });
-  }
-
-  editEntry(entry: Inventory): void {
-    this.openInventoryDialog(entry).subscribe((result?: Inventory) => {
-      if (result) {
-        const data = [...this.inventoryData$.value];
-        const index = data.findIndex((i) => i.id === entry.id);
-        if (index !== -1) {
-          data[index] = result;
-          this.inventoryData$.next(data);
-        }
-
-        const message = 'Entry has been modified';
-        const description = `Modified entry with ID ${entry.id} at ${new Date().toLocaleString()}`;
-
-        this.toastService.showToast(message, description);
-      }
-    });
-  }
-
-  async deleteEntry(entry: Inventory): Promise<void> {
-    const confirmed = await this.confirmDialog.confirm(
-      `Delete entry with id ${entry.id}?`,
-      'This action will permanently remove the entry.',
-    );
-    if (confirmed) {
-      const updated = this.inventoryData$.value.filter(
-        (i) => i.id !== entry.id,
-      );
-      this.inventoryData$.next(updated);
-
-      const message = 'Entry has been deleted';
-      const description = `Deleted entry with ID ${entry.id} at ${new Date().toLocaleString()}`;
-
-      this.toastService.showToast(message, description);
-    }
-  }
-
-  private generateId(): number {
-    return Math.max(0, ...this.inventoryData$.value.map((u) => u.id ?? 0)) + 1;
-  }
-
-  private openInventoryDialog(entry?: Inventory) {
-    return this.dialog.open(InventoryDialogComponent, {
-      context: entry ? { entry } : undefined,
-      contentClass: 'sm:!min-w-[500px] sm:!max-w-[600px]',
-    }).closed$;
-  }
 }

@@ -1,29 +1,19 @@
 <section class="flex flex-col gap-4">
-  <button
-    hlmBtn
-    variant="secondary"
-    class="rounded-md flex text-l py-6 w-fit"
-    (click)="createNewEntry()"
-  >
-    <ng-icon hlm size="base" class="mr-2" name="lucidePlus" />
-    Create new entry
-  </button>
-
   <div class="overflow-x-auto">
     <hlm-table class="min-w-[800px] table-fixed">
       <hlm-trow>
-        <hlm-th class="px-4 py-2 w-[10%]">ID</hlm-th>
+        <hlm-th class="px-4 py-2 w-[15%]">Order Nr.</hlm-th>
         <hlm-th class="px-4 py-2 w-[20%]">
-          <span>Product Name</span>
+          <span>Product</span>
           <ng-icon
             hlm
             class="ml-3 cursor-pointer"
             size="sm"
             name="lucideArrowUpDown"
-            (click)="sortByColumn('productName')"
+            (click)="sortByColumn('product')"
           />
         </hlm-th>
-        <hlm-th class="px-4 py-2 w-[15%]">
+        <hlm-th class="px-4 py-2 w-[20%]">
           <span>Category</span>
           <ng-icon
             hlm
@@ -44,58 +34,37 @@
           />
         </hlm-th>
         <hlm-th class="px-4 py-2 w-[15%]">
-          <span>Price per Unit</span>
+          <span>Total Price</span>
           <ng-icon
             hlm
             class="ml-3 cursor-pointer"
             size="sm"
             name="lucideArrowUpDown"
-            (click)="sortByColumn('pricePerUnit')"
+            (click)="sortByColumn('totalPrice')"
           />
         </hlm-th>
         <hlm-th class="px-4 py-2 w-[15%]">
-          <span>Stock Count</span>
+          <span>Delivery Status</span>
           <ng-icon
             hlm
             class="ml-3 cursor-pointer"
             size="sm"
             name="lucideArrowUpDown"
-            (click)="sortByColumn('stockCount')"
+            (click)="sortByColumn('deliveryStatus')"
           />
         </hlm-th>
-        <hlm-th class="px-4 py-2 w-[10%]"></hlm-th>
       </hlm-trow>
 
       @for (entry of _filteredSortedPaginatedEntries$ | async; track $index) {
         <hlm-trow>
-          <hlm-td class="px-4 py-4 w-[10%]">{{ entry.id }}</hlm-td>
-          <hlm-td class="px-4 py-4 w-[20%]">{{ entry.productName }}</hlm-td>
-          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.category }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.orderNr }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[20%]">{{ entry.product }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[20%]">{{ entry.category }}</hlm-td>
           <hlm-td class="px-4 py-4 w-[15%]">{{ entry.quantity }}</hlm-td>
           <hlm-td class="px-4 py-4 w-[15%]">{{
-            entry.pricePerUnit | currency
-          }}</hlm-td>
-          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.stockCount }}</hlm-td>
-          <hlm-td class="px-4 py-4 w-[10%]">
-            <div class="flex gap-3 justify-center w-full">
-              <ng-icon
-                hlm
-                size="sm"
-                color="green"
-                class="cursor-pointer"
-                name="lucidePencil"
-                (click)="editEntry(entry)"
-              />
-              <ng-icon
-                hlm
-                size="sm"
-                color="red"
-                class="cursor-pointer"
-                name="lucideTrash2"
-                (click)="deleteEntry(entry)"
-              />
-            </div>
-          </hlm-td>
+              entry.totalPrice | currency
+            }}</hlm-td>
+          <hlm-td class="px-4 py-4 w-[15%]">{{ entry.deliveryStatus }}</hlm-td>
         </hlm-trow>
       }
     </hlm-table>

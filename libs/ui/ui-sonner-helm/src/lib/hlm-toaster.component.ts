@@ -4,27 +4,28 @@ import type { ClassValue } from 'clsx';
 import { NgxSonnerToaster, type ToasterProps } from 'ngx-sonner';
 
 @Component({
-	selector: 'hlm-toaster',
-	imports: [NgxSonnerToaster],
-	template: `
-		<ngx-sonner-toaster
-			[class]="_computedClass()"
-			[invert]="invert()"
-			[theme]="theme()"
-			[position]="position()"
-			[hotKey]="hotKey()"
-			[richColors]="richColors()"
-			[expand]="expand()"
-			[duration]="duration()"
-			[visibleToasts]="visibleToasts()"
-			[closeButton]="closeButton()"
-			[toastOptions]="toastOptions()"
-			[offset]="offset()"
-			[dir]="dir()"
-			[style]="userStyle()"
-		/>
-	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'hlm-toaster',
+  imports: [NgxSonnerToaster],
+  template: `
+    <ngx-sonner-toaster
+      [class]="_computedClass()"
+      [invert]="invert()"
+      [theme]="theme()"
+      [position]="position()"
+      [hotKey]="hotKey()"
+      [richColors]="richColors()"
+      [expand]="expand()"
+      [duration]="duration()"
+      [visibleToasts]="visibleToasts()"
+      [closeButton]="closeButton()"
+      [toastOptions]="toastOptions()"
+      [offset]="offset()"
+      [dir]="dir()"
+      [style]="userStyle()"
+    />
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
 export class HlmToasterComponent {
 	public readonly invert = input<ToasterProps['invert'], boolean | string>(false, {

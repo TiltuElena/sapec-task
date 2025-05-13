@@ -8,4 +8,12 @@ import { SidenavComponent } from '@/components/layout/sidenav/sidenav.component'
   templateUrl: './admin.component.html',
   standalone: true,
 })
-export class AdminComponent {}
+export class AdminComponent {
+  ngOnInit() {
+    document.body.classList.add('no-scroll');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('no-scroll');
+  }
+}

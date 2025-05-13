@@ -157,3 +157,8 @@
 .p-datepicker-day-selected {
   @apply bg-success;
 }
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}

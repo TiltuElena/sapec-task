@@ -1,0 +1,35 @@
+<div class="flex flex-wrap justify-center gap-6 w-full">
+  @for (card of cardData; track card) {
+    <section class="max-w-md w-full p-4" hlmCard>
+      <div hlmCardHeader>
+        <div class="flex gap-4 items-center">
+          <ng-icon hlm size="lg" class="text-primary" [name]="card.icon" />
+          <div>
+            <h3 hlmCardTitle class="text-2xl font-medium">
+              {{ card.title }}
+            </h3>
+            <p hlmCardDescription class="text-xl mt-1 text-muted-foreground">
+              @if (card?.currency) {
+                {{ card.data | async | currency }}
+              } @else {
+                {{ card.data | async }}
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <brn-separator hlmSeparator class="my-4" />
+
+      <button
+        hlmBtn
+        variant="ghost"
+        class="w-full justify-between"
+        (click)="redirectToPurchases()"
+      >
+        <span>View more</span>
+        <ng-icon hlm size="base" name="lucideArrowRight" />
+      </button>
+    </section>
+  }
+</div>
