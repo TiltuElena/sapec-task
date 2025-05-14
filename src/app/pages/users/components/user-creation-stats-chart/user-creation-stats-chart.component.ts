@@ -10,7 +10,8 @@ import {
 } from 'ng-apexcharts';
 import { UserDataService } from '../../services/user-data.service';
 import { User } from '@/ts/interfaces';
-import { Subscription } from 'rxjs';
+import { combineLatest, map, Subscription } from 'rxjs';
+import { ThemeService } from '@/services/theme.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -21,6 +22,7 @@ export type ChartOptions = {
   fill: ApexFill;
   stroke: ApexStroke;
   dataLabels: ApexDataLabels;
+  theme: ApexTheme;
 };
 @Component({
   selector: 'app-user-creation-stats-chart',
@@ -33,7 +35,13 @@ export class UserCreationStatsChartComponent {
   public chartOptions: ChartOptions;
   private userDataSubscription!: Subscription;
 
-  constructor(private userDataService: UserDataService) {
+  constructor(
+    private userDataService: UserDataService,
+    private themeService: ThemeService,
+  ) {
+    const storedTheme =
+      localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+
     this.chartOptions = {
       series: [],
       chart: {
@@ -83,29 +91,50 @@ export class UserCreationStatsChartComponent {
       dataLabels: {
         enabled: false,
       },
+      theme: {
+        mode: storedTheme,
+        palette: 'palette2',
+        monochrome: {
+          enabled: false,
+          shadeTo: storedTheme,
+          shadeIntensity: 0.65,
+        },
+      },
     };
   }
 
   ngOnInit(): void {
-    this.userDataSubscription = this.userDataService.userData$.subscribe(
-      (users: User[]) => {
-        this.processUserDataForChart(users);
-      },
-    );
+    this.userDataSubscription = combineLatest([
+      this.userDataService.userData$,
+      this.themeService.theme$,
+    ])
+      .pipe(
+        map(([users, theme]) => {
+          const chartOptions = this.buildFullChartOptions(users, theme);
+          return chartOptions;
+        }),
+      )
+      .subscribe((options) => {
+        this.chartOptions = options;
+        this.chart?.updateOptions(this.chartOptions);
+      });
   }
 
-  ngOnDestroy(): void {
-    if (this.userDataSubscription) {
-      this.userDataSubscription.unsubscribe();
-    }
-  }
+  private buildFullChartOptions(
+    users: User[],
+    theme: 'dark' | 'light',
+  ): ChartOptions {
+    const isDark = theme === 'dark';
+    const labelColor = isDark ? '#fff' : '#000';
+    // const startColor = isDark ? '#3b82f6' : '#60a5fa';
+    // const endColor = isDark ? '#1e3a8a' : '#3b82f6';
+    const endColor = isDark ? '#000' : '#fff';
 
-  private processUserDataForChart(users: User[]): void {
+    const creationDateCounts: { [date: string]: number } = {};
     const sortedUsers = [...users].sort(
       (a, b) => a.creationTime.getTime() - b.creationTime.getTime(),
     );
 
-    const creationDateCounts: { [date: string]: number } = {};
     sortedUsers.forEach((user) => {
       const creationDate = user.creationTime.toISOString().split('T')[0];
       creationDateCounts[creationDate] =
@@ -114,10 +143,9 @@ export class UserCreationStatsChartComponent {
 
     const dates = Object.keys(creationDateCounts).sort();
     const userCounts = dates.map((date) => creationDateCounts[date]);
-    const dailyCounts: { [date: number]: number } = {};
 
+    const dailyCounts: { [timestamp: number]: number } = {};
     sortedUsers.forEach((user) => {
-
       const startOfDay = new Date(
         Date.UTC(
           user.creationTime.getUTCFullYear(),
@@ -135,24 +163,88 @@ export class UserCreationStatsChartComponent {
         y: count,
       }));
 
-    this.chartOptions.series = [
-      {
-        name: 'Users Created',
-        data: userCounts,
+    const maxY = Math.max(...seriesData.map((data) => data.y)) + 2;
+
+    return {
+      series: [
+        {
+          name: 'Users Created',
+          data: userCounts,
+        },
+      ],
+      chart: {
+        height: 'auto',
+        width: '100%',
+        type: 'area',
+        toolbar: {
+          show: true,
+          tools: {
+            download: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+            reset: false,
+          },
+        },
+        zoom: {
+          enabled: false,
+        },
       },
-    ];
-
-    this.chartOptions.xaxis = {
-      categories: dates,
+      title: {
+        text: 'User Creation Time',
+        align: 'left',
+        style: { color: labelColor },
+      },
+      xaxis: {
+        type: 'datetime',
+        labels: {
+          format: 'dd MMM yy',
+          style: { colors: labelColor },
+        },
+        axisBorder: { color: labelColor },
+        axisTicks: { color: labelColor },
+        categories: dates,
+      },
+      yaxis: {
+        min: 0,
+        max: maxY,
+        forceNiceScale: true,
+        labels: {
+          style: { colors: labelColor },
+        },
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.7,
+          opacityTo: 0.9,
+          stops: [0, 100],
+          gradientToColors: [endColor],
+          colorStops: [],
+        },
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      theme: {
+        mode: theme,
+        palette: 'palette2',
+        monochrome: {
+          enabled: false,
+          shadeTo: theme,
+          shadeIntensity: 0.65,
+        },
+      },
     };
+  }
 
-    this.chartOptions.yaxis = {
-      ...this.chartOptions.yaxis,
-      max: Math.max(...seriesData.map((data) => data.y)) + 2,
-    };
-
-    if (this.chart) {
-      this.chart.render();
+  ngOnDestroy(): void {
+    if (this.userDataSubscription) {
+      this.userDataSubscription.unsubscribe();
     }
   }
 }
