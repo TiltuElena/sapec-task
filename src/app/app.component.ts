@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '@/shared/components/confirm-dialog/confirm-dialog.component';
 import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
 
 @Component({
@@ -11,4 +11,8 @@ import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
 })
 export class AppComponent {
   title = 'sapec-task';
+
+  throwError() {
+    throw new Error('Standalone component error!');
+  }
 }

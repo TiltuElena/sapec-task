@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { authGuard } from './shared/guards/auth.guard';
-import { UserRole } from '@/ts/enums';
+import { authGuard } from '@/core/guards/auth.guard';
+import { UserRole } from '@/shared/enums';
 
 export const routes: Route[] = [
   {
@@ -8,17 +8,17 @@ export const routes: Route[] = [
     canActivate: [authGuard],
     data: { role: UserRole.ADMIN },
     loadComponent: () =>
-      import('./layouts/admin/admin.component').then((m) => m.AdminComponent),
+      import('@/core/layouts/admin/admin.component').then((m) => m.AdminComponent),
     children: [
       {
         path: 'users',
         loadChildren: () =>
-          import('./pages/users/users.route').then((m) => m.usersRoute),
+          import('@/modules/users/users.route').then((m) => m.usersRoute),
       },
       {
         path: 'inventory',
         loadChildren: () =>
-          import('./pages/inventory/inventory.route').then(
+          import('@/modules/inventory/inventory.route').then(
             (m) => m.inventoryRoute,
           ),
       },
@@ -34,17 +34,17 @@ export const routes: Route[] = [
     canActivate: [authGuard],
     data: { role: UserRole.USER },
     loadComponent: () =>
-      import('./layouts/user/user.component').then((m) => m.UserComponent),
+      import('@/core/layouts/user/user.component').then((m) => m.UserComponent),
     children: [
       {
         path: '',
         loadChildren: () =>
-          import('./pages/home/home.route').then((m) => m.homeRoute),
+          import('@/modules/home/home.route').then((m) => m.homeRoute),
       },
       {
         path: 'purchases',
         loadChildren: () =>
-          import('./pages/purchases/purchases.route').then(
+          import('@/modules/purchases/purchases.route').then(
             (m) => m.purchasesRoute,
           ),
       },
@@ -63,18 +63,18 @@ export const routes: Route[] = [
   {
     path: '',
     loadComponent: () =>
-      import('./layouts/auth/auth.component').then((m) => m.AuthComponent),
+      import('@/core/layouts/auth/auth.component').then((m) => m.AuthComponent),
     children: [
       {
         path: '',
         loadChildren: () =>
-          import('./pages/auth/auth.route').then((m) => m.authRoutes),
+          import('@/modules/auth/auth.route').then((m) => m.authRoutes),
       },
     ],
   },
   {
     path: '**',
     loadChildren: () =>
-      import('./pages/not-found/not-found.route').then((m) => m.notFoundRoute),
+      import('@/modules/not-found/not-found.route').then((m) => m.notFoundRoute),
   },
 ];

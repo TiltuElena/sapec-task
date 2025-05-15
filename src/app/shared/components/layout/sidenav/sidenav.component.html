@@ -1,0 +1,33 @@
+<nav hlmCard
+  class="flex flex-col h-full p-5 w-full min-w-64 shadow-lg shadow-black/10 box-border rounded-none border-b-0 border-t-0 border-l-0"
+>
+  <app-theme-toggle></app-theme-toggle>
+  <div class="flex flex-col flex-grow w-full gap-4">
+    @for (route of routes; track route) {
+      <div
+        class="flex gap-2 items-center transition duration-300 ease-out hover:opacity-70 cursor-pointer"
+      >
+        <ng-icon hlm size="base" [name]="route.icon" />
+        <span
+          routerLinkActive="font-bold text-success transition duration-300 ease-out"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="route.link"
+          class="text-xl"
+        >
+          {{ route.title }}
+        </span>
+      </div>
+    }
+  </div>
+
+  <div class="w-full">
+    <brn-separator hlmSeparator class="my-4" />
+    <div
+      class="flex items-center gap-3 text-xl transition duration-200 hover:opacity-70 cursor-pointer"
+      (click)="logout()"
+    >
+      <ng-icon hlm size="base" name="lucideLogOut" />
+      <span>Logout</span>
+    </div>
+  </div>
+</nav>
