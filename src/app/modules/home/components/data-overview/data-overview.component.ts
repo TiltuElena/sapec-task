@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { BrnSeparatorComponent } from '@spartan-ng/brain/separator';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
 import {
   HlmCardDescriptionDirective,
   HlmCardDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui-card-helm';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
-import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
+} from '@/shared/components/libs/ui/ui-card-helm/src';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
+import { HlmSeparatorDirective } from '@/shared/components/libs/ui/ui-separator-helm/src';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';

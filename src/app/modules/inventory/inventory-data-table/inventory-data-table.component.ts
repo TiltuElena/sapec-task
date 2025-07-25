@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
 import {
   HlmTableComponent,
   HlmTableModule,
   HlmTrowComponent,
-} from '@spartan-ng/ui-table-helm';
+} from '@/shared/components/libs/ui/ui-table-helm/src';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { Inventory } from '@/shared/interfaces';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { ConfirmDialogService } from '@/shared/services/confirm-dialog.service';
-import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
+import { HlmDialogService } from '@/shared/components/libs/ui/ui-dialog-helm/src';
 import {
   lucidePencil,
   lucidePlus,
@@ -20,8 +20,8 @@ import {
 } from '@ng-icons/lucide';
 import { InventoryDialogComponent } from '@/modules/inventory/inventory-dialog/inventory-dialog.component';
 import { BrnTableModule } from '@spartan-ng/brain/table';
-import { HlmPaginationModule } from '@spartan-ng/ui-pagination-helm';
-import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
+import { HlmPaginationModule } from '@/shared/components/libs/ui/ui-pagination-helm/src';
+import { HlmSelectModule } from '@/shared/components/libs/ui/ui-select-helm/src';
 import { FormsModule } from '@angular/forms';
 import { PaginatorComponent } from '@/shared/components/paginator/paginator.component';
 import { ToastService } from '@/shared/services/toast.service';

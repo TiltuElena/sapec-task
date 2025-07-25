@@ -76,7 +76,7 @@
   </div>
 
   <div class="w-full flex flex-col gap-2">
-    <label hlmLabel for="creationTime">Creation TIme</label>
+    <label hlmLabel for="creationTime">Creation Time</label>
     <p-date-picker
       placeholder="mm/dd/yyyy"
       id="creationTime"
@@ -87,7 +87,7 @@
       userForm.get("creationTime")?.hasError("required") &&
       userForm.get("creationTime")?.touched
     ) {
-      <div class="text-destructive">Creation date is required</div>
+      <div class="text-destructive">Creation time is required</div>
     }
   </div>
 

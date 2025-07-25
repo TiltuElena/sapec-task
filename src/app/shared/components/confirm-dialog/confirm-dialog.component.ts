@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { HlmAlertDialogModule } from '@spartan-ng/ui-alertdialog-helm';
+import { HlmAlertDialogModule } from '@/shared/components/libs/ui/ui-alertdialog-helm/src';
 import { BrnAlertDialogContentDirective } from '@spartan-ng/brain/alert-dialog';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmDialogModule } from '@spartan-ng/ui-dialog-helm';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
+import { HlmDialogModule } from '@/shared/components/libs/ui/ui-dialog-helm/src';
 import { ConfirmDialogService } from '@/shared/services/confirm-dialog.service';
 
 @Component({

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { User } from '@/shared/interfaces';
 import { UserRole, UserStatus } from '@/shared/enums';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserDataService {
-  constructor() {}
+  constructor(private readonly http: HttpClient) {}
+
   data: User[] = [
     {
       id: 0,
@@ -68,4 +70,8 @@ export class UserDataService {
   ];
 
   userData$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.data);
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>('https://jsonplaceholder.typicode.com/users')
+  }
 }

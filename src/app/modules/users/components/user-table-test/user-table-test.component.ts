@@ -19,27 +19,27 @@ import {
   lucidePlus,
   lucideTrash2,
 } from '@ng-icons/lucide';
-import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { HlmCheckboxModule } from '@spartan-ng/ui-checkbox-helm';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmButtonModule } from '@/shared/components/libs/ui/ui-button-helm/src';
+import { HlmCheckboxModule } from '@/shared/components/libs/ui/ui-checkbox-helm/src';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
+import { HlmInputDirective } from '@/shared/components/libs/ui/ui-input-helm/src';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
-import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
+import { HlmMenuModule } from '@/shared/components/libs/ui/ui-menu-helm/src';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   BrnTableModule,
   PaginatorState,
   useBrnColumnManager,
 } from '@spartan-ng/brain/table';
-import { HlmTableModule } from '@spartan-ng/ui-table-helm';
+import { HlmTableModule } from '@/shared/components/libs/ui/ui-table-helm/src';
 import { BrnSelectModule } from '@spartan-ng/brain/select';
-import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
+import { HlmSelectModule } from '@/shared/components/libs/ui/ui-select-helm/src';
 import { debounceTime, map } from 'rxjs';
 import { User } from '@/shared/interfaces';
 import { UserDataService } from '@/modules/users/services/user-data.service';
 import { UserDialogComponent } from '@/modules/users/components/user-dialog/user-dialog.component';
 import { ConfirmDialogService } from '@/shared/services/confirm-dialog.service';
-import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
+import { HlmDialogService } from '@/shared/components/libs/ui/ui-dialog-helm/src';
 
 @Component({
   selector: 'app-user-table-test',
@@ -180,6 +180,11 @@ export class UserTableTestComponent {
     effect(() => {
       const debouncedFilter = this._debouncedFilter();
       untracked(() => this._dataFilter.set(debouncedFilter ?? ''));
+    });
+
+    this.userDataService.getUsers().subscribe({
+      next: (users) => console.log(users),
+      error: (err) => console.error('HTTP ERROR', err)
     });
   }
 

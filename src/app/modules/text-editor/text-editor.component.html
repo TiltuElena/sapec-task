@@ -1,0 +1,18 @@
+<div class="quill-wrapper">
+  <quill-editor
+    [customOptions]="customOptions"
+    [modules]="modules"
+    [(ngModel)]="model"
+    class="h-[400px] editor"
+    (ngModelChange)="onModelChange($event)"
+  ></quill-editor>
+</div>
+
+<br />
+<br />
+
+<div [innerHTML]="trustedHtml"></div>
+
+<br />
+<br />
+{{ model }}

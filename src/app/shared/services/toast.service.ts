@@ -5,12 +5,6 @@ import { toast } from 'ngx-sonner';
   providedIn: 'root',
 })
 export class ToastService {
-  // showToast(message: string, description: string) {
-  //   toast(message, {
-  //     description,
-  //   });
-  // }
-
   showErrorToast(message: string, description: string) {
     toast.error(message, {
       description,

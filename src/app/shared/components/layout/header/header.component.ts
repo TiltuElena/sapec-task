@@ -3,7 +3,7 @@ import { Route } from '@/shared/interfaces';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLogOut } from '@ng-icons/lucide';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
 import { AuthService } from '@/core/services/auth.service';
 import { PageRoutes } from '@/shared/enums';
 import { ThemeToggleComponent } from '@/shared/components/theme-toggle/theme-toggle.component';

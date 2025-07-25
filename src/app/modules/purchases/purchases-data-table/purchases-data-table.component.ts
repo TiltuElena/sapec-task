@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
 import {
   HlmTableComponent,
   HlmTableModule,
   HlmTrowComponent,
-} from '@spartan-ng/ui-table-helm';
+} from '@/shared/components/libs/ui/ui-table-helm/src';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { Purchase } from '../../../shared/interfaces';
+import { Purchase } from '@/shared/interfaces';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import {
   lucidePencil,
@@ -16,8 +16,8 @@ import {
   lucideArrowUpDown,
 } from '@ng-icons/lucide';
 import { BrnTableModule } from '@spartan-ng/brain/table';
-import { HlmPaginationModule } from '@spartan-ng/ui-pagination-helm';
-import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
+import { HlmPaginationModule } from '@/shared/components/libs/ui/ui-pagination-helm/src';
+import { HlmSelectModule } from '@/shared/components/libs/ui/ui-select-helm/src';
 import { FormsModule } from '@angular/forms';
 import { PaginatorComponent } from '@/shared/components/paginator/paginator.component';
 import { PurchasesDataService } from '@/modules/purchases/services/purchases-data.service';

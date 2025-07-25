@@ -8,7 +8,9 @@ export const routes: Route[] = [
     canActivate: [authGuard],
     data: { role: UserRole.ADMIN },
     loadComponent: () =>
-      import('@/core/layouts/admin/admin.component').then((m) => m.AdminComponent),
+      import('@/core/layouts/admin/admin.component').then(
+        (m) => m.AdminComponent,
+      ),
     children: [
       {
         path: 'users',
@@ -20,6 +22,13 @@ export const routes: Route[] = [
         loadChildren: () =>
           import('@/modules/inventory/inventory.route').then(
             (m) => m.inventoryRoute,
+          ),
+      },
+      {
+        path: 'editor',
+        loadComponent: () =>
+          import('@/modules/text-editor/text-editor.component').then(
+            (m) => m.TextEditorComponent,
           ),
       },
       {
@@ -75,6 +84,8 @@ export const routes: Route[] = [
   {
     path: '**',
     loadChildren: () =>
-      import('@/modules/not-found/not-found.route').then((m) => m.notFoundRoute),
+      import('@/modules/not-found/not-found.route').then(
+        (m) => m.notFoundRoute,
+      ),
   },
 ];

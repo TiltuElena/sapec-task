@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { UserDataService } from '../../services/user-data.service';
 import { User } from '@/shared/interfaces';
-import { HlmTableModule } from '@spartan-ng/ui-table-helm';
+import { HlmTableModule } from '@/shared/components/libs/ui/ui-table-helm/src';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
 import { lucideTrash2, lucidePencil, lucidePlus } from '@ng-icons/lucide';
 import { ConfirmDialogService } from '@/shared/services/confirm-dialog.service';
-import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
+import { HlmDialogService } from '@/shared/components/libs/ui/ui-dialog-helm/src';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { BehaviorSubject } from 'rxjs';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
+import { HlmTableComponent } from '@/shared/components/libs/ui/ui-table-helm/src';
 
 @Component({
   selector: 'app-user-data-table',
@@ -21,6 +22,8 @@ import { BehaviorSubject } from 'rxjs';
     HlmIconDirective,
     NgIcon,
     AsyncPipe,
+    HlmButtonDirective,
+    HlmTableComponent,
   ],
   providers: [provideIcons({ lucideTrash2, lucidePencil, lucidePlus })],
   templateUrl: './user-data-table.component.html',

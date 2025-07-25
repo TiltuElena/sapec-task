@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import {
   HlmCardContentDirective, HlmCardDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui-card-helm';
-import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+} from '@/shared/components/libs/ui/ui-card-helm/src';
+import { HlmLabelDirective } from '@/shared/components/libs/ui/ui-label-helm/src';
+import { HlmInputDirective } from '@/shared/components/libs/ui/ui-input-helm/src';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
 import {
   FormBuilder,
   FormGroup,

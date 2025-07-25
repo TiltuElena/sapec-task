@@ -10,12 +10,12 @@ import {
   HlmPaginationItemDirective,
   HlmPaginationLinkDirective,
   HlmPaginationModule,
-} from '@spartan-ng/ui-pagination-helm';
+} from '@/shared/components/libs/ui/ui-pagination-helm/src';
 import {
   HlmSelectContentDirective,
   HlmSelectModule,
   HlmSelectValueDirective,
-} from '@spartan-ng/ui-select-helm';
+} from '@/shared/components/libs/ui/ui-select-helm/src';
 import { FormsModule } from '@angular/forms';
 
 @Component({

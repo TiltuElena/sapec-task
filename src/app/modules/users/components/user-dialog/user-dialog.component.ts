@@ -5,17 +5,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HlmDialogModule } from '@spartan-ng/ui-dialog-helm';
+import { HlmDialogModule } from '@/shared/components/libs/ui/ui-dialog-helm/src';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { HlmDatePickerModule } from '@spartan-ng/ui-datepicker-helm';
-import { HlmAlertDialogModule } from '@spartan-ng/ui-alertdialog-helm';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
+import { HlmLabelDirective } from '@/shared/components/libs/ui/ui-label-helm/src';
+import { HlmInputDirective } from '@/shared/components/libs/ui/ui-input-helm/src';
+import { HlmDatePickerModule } from '@/shared/components/libs/ui/ui-datepicker-helm/src';
+import { HlmAlertDialogModule } from '@/shared/components/libs/ui/ui-alertdialog-helm/src';
 import { DatePicker } from 'primeng/datepicker';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
-import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
-import { User } from '../../../../shared/interfaces';
+import { HlmSelectModule } from '@/shared/components/libs/ui/ui-select-helm/src';
+import { User } from '@/shared/interfaces';
 
 @Component({
   selector: 'app-user-dialog',

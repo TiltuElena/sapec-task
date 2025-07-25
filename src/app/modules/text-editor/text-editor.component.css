@@ -1,0 +1,134 @@
+::ng-deep .ql-toolbar {
+  @apply bg-gray-400 text-foreground;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+::ng-deep .ql-toolbar button {
+  margin: 0 4px;
+  border-radius: 4px;
+  background: cadetblue !important;
+}
+
+::ng-deep .ql-toolbar button:hover {
+  background: olivedrab !important;
+}
+
+::ng-deep .ql-toolbar button svg .ql-fill {
+  fill: green;
+}
+
+::ng-deep .ql-toolbar button svg .ql-stroke {
+  stroke: green;
+}
+
+::ng-deep .ql-toolbar button:hover svg .ql-stroke {
+  stroke: red !important;
+}
+
+::ng-deep .ql-toolbar button:hover svg .ql-fill {
+  fill: red !important;
+}
+
+::ng-deep .ql-toolbar button:hover {
+  background-color: #ddd;
+}
+
+::ng-deep .ql-container {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+::ng-deep .ql-picker-item {
+  @apply bg-red-600 text-green-300 rounded-lg px-2;
+}
+
+::ng-deep .ql-picker-item:hover {
+  @apply bg-red-900 text-green-500  !important;
+}
+
+::ng-deep .ql-font {
+  background-color: #fffce0;
+  border-radius: 6px;
+}
+
+::ng-deep .quill-wrapper .ql-picker-options {
+  background: violet !important;
+  border-radius: 6px;
+  padding: 10px 10px;
+}
+
+::ng-deep .quill-wrapper .ql-align .ql-picker-options {
+  padding: 8px 10px;
+}
+
+::ng-deep .ql-picker-label svg .ql-fill {
+  fill: green;
+}
+
+::ng-deep .ql-picker-label svg .ql-stroke {
+  stroke: green;
+}
+
+::ng-deep .ql-picker-label:hover svg .ql-stroke {
+  stroke: magenta !important;
+}
+
+::ng-deep .ql-picker-label:hover svg .ql-fill {
+  fill: magenta !important;
+}
+
+::ng-deep .ql-picker-label {
+  color: blue;
+  background: cornflowerblue !important;
+  border-radius: 6px;
+}
+
+::ng-deep .ql-picker-label.ql-active::before {
+  color: yellow;
+}
+
+::ng-deep .ql-picker-label:hover {
+  color: cyan !important;
+  background: darkslategrey !important;
+}
+
+::ng-deep .ql-picker-label:focus {
+  color: orange !important;
+}
+
+::ng-deep .ql-font .ql-picker-label svg .ql-stroke {
+  stroke: palegreen;
+}
+
+::ng-deep .ql-color {
+  margin-right: 10px;
+}
+
+::ng-deep .ql-editor.ql-blank::before {
+  @apply text-foreground;
+}
+
+::ng-deep .ql-picker.ql-size .ql-picker-label::before {
+  content: attr(data-label);
+}
+
+::ng-deep .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before,
+::ng-deep .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before{
+  content: "14px";
+}
+
+::ng-deep .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before,
+::ng-deep .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before{
+  content: "18px";
+}
+
+::ng-deep .ql-picker.ql-size .ql-picker-item[data-value="22px"]::before,
+::ng-deep .ql-picker.ql-size .ql-picker-label[data-value="22px"]::before {
+  content: "22px";
+}

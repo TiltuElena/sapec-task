@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidenavComponent } from '@/shared/components/layout/sidenav/sidenav.component';
+import {AdminHeaderComponent} from '@/shared/components/layout/admin-header/admin-header.component';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterOutlet, SidenavComponent],
+  imports: [RouterOutlet, SidenavComponent, AdminHeaderComponent],
   templateUrl: './admin.component.html',
   standalone: true,
 })

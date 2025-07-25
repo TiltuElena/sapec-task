@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ConfirmDialogComponent } from '@/shared/components/confirm-dialog/confirm-dialog.component';
-import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
+import { HlmToasterComponent } from '@/shared/components/libs/ui/ui-sonner-helm/src';
 
 @Component({
   selector: 'app-root',

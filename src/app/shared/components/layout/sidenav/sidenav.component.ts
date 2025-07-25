@@ -3,12 +3,11 @@ import { Route } from '../../../interfaces';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideUserRound, lucidePackage, lucideLogOut } from '@ng-icons/lucide';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@/shared/components/libs/ui/ui-icon-helm/src';
 import { AuthService } from '@/core/services/auth.service';
 import { PageRoutes } from '../../../enums';
-import { ThemeToggleComponent } from '@/shared/components/theme-toggle/theme-toggle.component';
-import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
-import {HlmCardDirective} from '@spartan-ng/ui-card-helm';
+import { HlmSeparatorDirective } from '@/shared/components/libs/ui/ui-separator-helm/src';
+import { HlmCardDirective } from '@/shared/components/libs/ui/ui-card-helm/src';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,7 +16,6 @@ import {HlmCardDirective} from '@spartan-ng/ui-card-helm';
     NgIcon,
     HlmIconDirective,
     RouterLinkActive,
-    ThemeToggleComponent,
     HlmSeparatorDirective,
     HlmCardDirective,
   ],

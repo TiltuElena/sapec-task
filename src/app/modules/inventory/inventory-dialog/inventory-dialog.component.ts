@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonDirective } from '@/shared/components/libs/ui/ui-button-helm/src';
 import {
   HlmDialogDescriptionDirective,
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
   HlmDialogTitleDirective,
-} from '@spartan-ng/ui-dialog-helm';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
+} from '@/shared/components/libs/ui/ui-dialog-helm/src';
+import { HlmInputDirective } from '@/shared/components/libs/ui/ui-input-helm/src';
+import { HlmLabelDirective } from '@/shared/components/libs/ui/ui-label-helm/src';
+import { HlmSelectModule } from '@/shared/components/libs/ui/ui-select-helm/src';
 import {
   FormBuilder,
   FormGroup,
@@ -16,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { Inventory } from '../../../shared/interfaces';
+import { Inventory } from '@/shared/interfaces';
 
 @Component({
   selector: 'app-inventory-dialog',

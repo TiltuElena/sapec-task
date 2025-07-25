@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '@/shared/services/theme.service';
-import {HlmSwitchModule} from '@spartan-ng/ui-switch-helm';
-import {HlmLabelDirective} from '@spartan-ng/ui-label-helm';
+import { HlmSwitchModule } from '@/shared/components/libs/ui/ui-switch-helm/src';
+import { HlmLabelDirective } from '@/shared/components/libs/ui/ui-label-helm/src';
 
 @Component({
   selector: 'app-theme-toggle',
-  imports: [
-    HlmSwitchModule,
-    HlmLabelDirective
-  ],
+  imports: [HlmSwitchModule, HlmLabelDirective],
   templateUrl: './theme-toggle.component.html',
   standalone: true,
 })

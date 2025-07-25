@@ -1,0 +1,30 @@
+<button [brnMenuTriggerFor]="menu">
+  <img
+    [src]="selectedLang.icon"
+    [alt]="selectedLang.label"
+    class="w-[24px] h-[24px]"
+  />
+</button>
+
+<ng-template #menu>
+  <hlm-menu>
+    <hlm-menu-label class="text-center">{{
+      "LANGUAGE_SWITCH_TITLE" | translate
+    }}</hlm-menu-label>
+    <hlm-menu-separator />
+    <hlm-menu-group>
+      @for (language of languages; track language) {
+        <div
+          hlmMenuItem
+          class="flex justify-center items-center gap-3"
+          (click)="switchLanguage(language.value)"
+        >
+          <span>
+            {{ language.label }}
+          </span>
+          <img [src]="language.icon" alt="flag" class="w-[24px]" />
+        </div>
+      }
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>
